@@ -1,0 +1,14 @@
+1.Project File Structure
+2.project package:
+  npm i cors
+  npm i express
+  npm i express-rate-limit
+  npm i helmet
+  npm i jsonwebtoken
+  npm i mongoose
+  npm i nodemailer
+  npm i nodemon
+
+3.Rout config
+
+4.App.js config
