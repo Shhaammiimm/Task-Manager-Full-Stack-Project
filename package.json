@@ -1,4 +1,6 @@
 {
+  
+"homepage": "https://Shhaammiimm.github.io/Task-Manager-Full-Stack-Project/",
   "name": "task-manager-full-stack",
   "version": "1.0.0",
   "private": true,
@@ -7,7 +9,9 @@
     "dev:backend": "cd backend && npm run dev",
     "dev:frontend": "cd frontend && npm run dev",
     "build": "cd frontend && npm run build",
-    "start:backend": "cd backend && npm start"
+    "start:backend": "cd backend && npm start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d frontend/dist"
   },
   "devDependencies": {
     "concurrently": "^9.1.0",
