@@ -1,283 +1,145 @@
 # Task Manager - Full Stack Todo List Application
 
-A complete full-stack todo list application with user authentication, task management, and a modern responsive UI.
+A full-stack todo list app with **React** frontend and **Express** backend: user auth, task management with priority & due dates, dark mode, search, and sort.
 
-## 🚀 Features
+## Project structure
 
-### Backend Features
-- **User Authentication**: Registration, login, password reset with email verification
-- **Task Management**: Create, read, update, delete tasks
-- **Task Status Management**: Pending, Completed, Cancelled statuses
-- **User Profile Management**: View and update profile details
-- **Security**: JWT authentication, rate limiting, CORS protection
-- **Database**: MongoDB with Mongoose ODM
+```
+Task-Manager-Full-Stack-Project/
+├── backend/                 # Express API
+│   ├── app.js               # Server entry
+│   ├── routes/api.js        # API routes
+│   ├── app/
+│   │   ├── config/          # Config (port, DB, JWT)
+│   │   ├── controller/     # Task & user controllers
+│   │   ├── middlewares/     # Auth middleware
+│   │   ├── model/          # Mongoose models
+│   │   └── utility/        # Token, email
+│   ├── .env.example
+│   └── package.json
+├── frontend/                 # React (Vite)
+│   ├── index.html           # Entry HTML (kept as requested)
+│   ├── src/
+│   │   ├── main.jsx
+│   │   ├── App.jsx
+│   │   ├── api/client.js    # API client
+│   │   ├── context/         # Auth, Toast, Theme
+│   │   └── components/      # Navbar, Auth, Dashboard, Tasks, Modals
+│   ├── public/
+│   └── package.json
+├── package.json              # Root scripts (dev, build)
+├── start.bat / start.sh
+└── README.md
+```
 
-### Frontend Features
-- **Modern UI**: Built with Tailwind CSS and Font Awesome icons
-- **Responsive Design**: Works on desktop, tablet, and mobile devices
-- **Real-time Updates**: Instant feedback for all operations
-- **Task Filtering**: Filter tasks by status (All, Pending, Completed, Cancelled)
-- **Statistics Dashboard**: Visual representation of task counts
-- **Toast Notifications**: User-friendly success/error messages
-- **Loading States**: Smooth loading indicators
-
-## 🛠️ Tech Stack
+## Features
 
 ### Backend
-- **Node.js** - Runtime environment
-- **Express.js** - Web framework
-- **MongoDB** - Database
-- **Mongoose** - ODM for MongoDB
-- **JWT** - Authentication
-- **Nodemailer** - Email functionality
-- **Helmet** - Security middleware
-- **CORS** - Cross-origin resource sharing
-- **Rate Limiting** - API protection
+- User auth: register, login, forgot/reset password (email OTP)
+- Profile: get/update
+- Tasks: create, update, delete, filter by status, count
+- Task fields: title, description, status, **priority** (low/medium/high), **due date** (optional)
+- JWT, rate limit, CORS, Helmet
 
-### Frontend
-- **HTML5** - Markup
-- **Tailwind CSS** - Styling framework
-- **Vanilla JavaScript** - Frontend logic
-- **Font Awesome** - Icons
-- **Fetch API** - HTTP requests
+### Frontend (React)
+- **Auth**: Login, Register, Forgot password, Reset password
+- **Dashboard**: Stats (total, pending, completed, cancelled)
+- **Tasks**: List with **search**, **sort** (date, title, status, priority, due date), **filter** (all/pending/completed/cancelled)
+- **Add/Edit task**: Title, description, status, priority, due date
+- **Profile** modal
+- **Dark mode** toggle (navbar + login page)
+- **Dynamic UI**: Animations, toasts, loading states, responsive layout
 
-## 📁 Project Structure
+## Tech stack
 
-```
-TODOLIST/
-├── app/
-│   ├── config/
-│   │   └── config.js          # Configuration settings
-│   ├── controller/
-│   │   ├── TaskController.js  # Task-related API endpoints
-│   │   └── UsersController.js # User-related API endpoints
-│   ├── middlewares/
-│   │   └── AuthMiddleware.js  # JWT authentication middleware
-│   ├── model/
-│   │   ├── TaskModel.js       # Task database schema
-│   │   └── UsersModel.js      # User database schema
-│   └── utility/
-│       ├── emailUtility.js    # Email sending functionality
-│       └── tokenUtility.js    # JWT token management
-├── frontend/
-│   ├── index.html             # Main HTML file
-│   └── js/
-│       └── app.js             # Frontend JavaScript logic
-├── routes/
-│   └── api.js                 # API route definitions
-├── app.js                     # Main server file
-├── package.json               # Dependencies and scripts
-└── README.md                  # Project documentation
-```
+- **Backend**: Node.js, Express, MongoDB, Mongoose, JWT, Nodemailer, Helmet, CORS, express-rate-limit
+- **Frontend**: React 18, Vite, Tailwind CSS (CDN), context (Auth, Toast, Theme)
 
-## 🚀 Getting Started
+## Getting started
 
 ### Prerequisites
-- Node.js (v14 or higher)
-- MongoDB (local or cloud instance)
-- npm or yarn package manager
+- Node.js 18+
+- MongoDB (local or Atlas)
 
-### Installation
+### 1. Clone and install
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd TODOLIST
-   ```
-
-2. **Install backend dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Set up environment variables**
-   Create a `.env` file in the root directory:
-   ```env
-       PORT=5000
-   DATABASE=mongodb://localhost:27017/todolist
-   JWT_SECRET=your_jwt_secret_key
-   EMAIL_USER=your_email@gmail.com
-   EMAIL_PASS=your_email_password
-   MAX_JSON_SIZE=10mb
-   WEB_CACHE=true
-   REQUEST_TIME=1200000
-   REQUEST_NUMBER=100
-   ```
-
-4. **Start the backend server**
-   ```bash
-   npm run dev
-   ```
-
-5. **Open the frontend**
-   - Navigate to the `frontend` folder
-   - Open `index.html` in your web browser
-   - Or serve it using a local server:
-     ```bash
-     cd frontend
-     npm start
-     # Then open http://localhost:8000
-     ```
-
-## 📖 API Documentation
-
-### Authentication Endpoints
-
-#### Register User
-```
-POST /api/Registration
-Content-Type: application/json
-
-{
-  "firstName": "John",
-  "lastName": "Doe",
-  "email": "john@example.com",
-  "mobile": "1234567890",
-  "password": "password123"
-}
+```bash
+git clone <repo-url>
+cd Task-Manager-Full-Stack-Project
 ```
 
-#### Login
-```
-POST /api/Login
-Content-Type: application/json
+### 2. Backend
 
-{
-  "email": "john@example.com",
-  "password": "password123"
-}
+```bash
+cd backend
+npm install
 ```
 
-#### Forgot Password
-```
-GET /api/EmailVerify/{email}
-```
+Copy env and edit as needed:
 
-#### Reset Password
-```
-POST /api/ResetPassword
-Content-Type: application/json
-
-{
-  "email": "john@example.com",
-  "code": "123456",
-  "password": "newpassword123"
-}
+```bash
+cp .env.example .env
 ```
 
-### Task Endpoints
+`.env` (optional overrides; defaults in `app/config/config.js`):
 
-#### Create Task
-```
-POST /api/CreateTask
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "title": "Complete project",
-  "description": "Finish the todo list application",
-  "status": "pending"
-}
-```
-
-#### Get Tasks by Status
-```
-GET /api/TaskListByStatus/{status}
-Authorization: Bearer <token>
+```env
+PORT=5000
+DATABASE=mongodb://127.0.0.1:27017/taskmanager
+JWT_KEY=YourJWTSecretKey
+JWT_EXPIRE_TIME=30d
+# Optional: for forgot-password email
+# EMAIL_HOST=...
+# EMAIL_PORT=...
+# EMAIL_USER=...
+# EMAIL_PASS=...
 ```
 
-#### Update Task Status
-```
-PATCH /api/UpdateTaskStatus/{taskId}/{status}
-Authorization: Bearer <token>
-```
+Start backend:
 
-#### Delete Task
-```
-DELETE /api/DeleteTask/{taskId}
-Authorization: Bearer <token>
+```bash
+npm run dev
 ```
 
-#### Get Task Count
+### 3. Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
 ```
-GET /api/CountTask
-Authorization: Bearer <token>
+
+Open **http://localhost:5173**. The Vite dev server proxies `/api` to `http://localhost:5000`.
+
+### 4. Run both from root (optional)
+
+```bash
+npm install
+npm run dev
 ```
 
-## 🎨 Frontend Features
+- Backend: http://localhost:5000  
+- Frontend: http://localhost:5173  
 
-### User Interface
-- **Clean Design**: Modern, minimalist interface
-- **Responsive Layout**: Adapts to different screen sizes
-- **Color-coded Status**: Visual indicators for task status
-- **Interactive Elements**: Hover effects and smooth transitions
+Or use `start.bat` (Windows) / `start.sh` (Linux/Mac) to start both.
 
-### User Experience
-- **Intuitive Navigation**: Easy switching between forms
-- **Real-time Feedback**: Immediate response to user actions
-- **Error Handling**: Clear error messages and validation
-- **Loading States**: Visual feedback during API calls
+## Build for production
 
-### Task Management
-- **Quick Actions**: One-click status updates
-- **Bulk Operations**: Filter and manage multiple tasks
-- **Search & Filter**: Find tasks by status
-- **Statistics**: Overview of task distribution
+```bash
+cd frontend
+npm run build
+```
 
-## 🔧 Configuration
+Output is in `frontend/dist`. Serve that folder (e.g. static host or GitHub Pages). Point the frontend API base to your deployed backend (e.g. set `VITE_API_BASE` and use it in `src/api/client.js` if you add env support).
 
-### Backend Configuration
-The application uses environment variables for configuration. Key settings include:
+## API (summary)
 
-- `PORT`: Server port (default: 3000)
-- `DATABASE`: MongoDB connection string
-- `JWT_SECRET`: Secret key for JWT tokens
-- `EMAIL_USER` & `EMAIL_PASS`: Email credentials for password reset
-- `REQUEST_TIME` & `REQUEST_NUMBER`: Rate limiting settings
+- **Auth**: `POST /api/Registration`, `POST /api/Login`, `GET /api/EmailVerify/:email`, `POST /api/ResetPassword`
+- **Profile**: `GET /api/ProfileDetails`, `PUT /api/ProfileUpdate` (Bearer token)
+- **Tasks**: `POST /api/CreateTask`, `PUT /api/UpdateTask/:id`, `PATCH /api/UpdateTaskStatus/:id/:status`, `GET /api/TaskListByStatus/:status`, `DELETE /api/DeleteTask/:id`, `GET /api/CountTask` (Bearer token)
 
-### Frontend Configuration
-The frontend connects to the backend via the `API_BASE_URL` constant in `app.js`. Update this if your backend runs on a different port or host.
+Task body can include: `title`, `description`, `status`, `priority` (low/medium/high), `dueDate` (ISO date string, optional).
 
-## 🚀 Deployment
+## License
 
-### Backend Deployment
-1. Set up environment variables on your hosting platform
-2. Install dependencies: `npm install`
-3. Start the server: `npm start`
-
-### Frontend Deployment
-1. Upload the `frontend` folder to your web server
-2. Update the `API_BASE_URL` in `app.js` to point to your backend
-3. Ensure CORS is properly configured on the backend
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
-## 📝 License
-
-This project is licensed under the ISC License.
-
-## 🆘 Support
-
-For support and questions:
-- Check the documentation
-- Review the code comments
-- Create an issue in the repository
-
-## 🔮 Future Enhancements
-
-- [ ] Task categories/tags
-- [ ] Due dates and reminders
-- [ ] File attachments
-- [ ] Team collaboration
-- [ ] Dark mode theme
-- [ ] Mobile app version
-- [ ] Advanced search and filtering
-- [ ] Task templates
-- [ ] Export/import functionality
-- [ ] Real-time notifications
+ISC.

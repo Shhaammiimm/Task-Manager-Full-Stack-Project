@@ -1,24 +1,16 @@
 #!/bin/bash
-
-echo "Starting Task Manager Application..."
+echo "Starting Task Manager (Backend + Frontend)..."
 echo
 
-echo "Starting Backend Server..."
-gnome-terminal --title="Backend Server" -- bash -c "npm run dev; exec bash" &
-
-echo "Waiting for backend to start..."
+echo "Starting Backend..."
+(cd backend && npm run dev) &
 sleep 3
 
-echo "Starting Frontend Server..."
-gnome-terminal --title="Frontend Server" -- bash -c "cd frontend && npm start; exec bash" &
+echo "Starting Frontend..."
+(cd frontend && npm run dev) &
 
 echo
-echo "Application is starting..."
 echo "Backend: http://localhost:5000"
-echo "Frontend: http://localhost:8000"
+echo "Frontend: http://localhost:5173"
 echo
-echo "Press Ctrl+C to stop all servers"
-echo
-
-# Wait for user to stop
 wait
